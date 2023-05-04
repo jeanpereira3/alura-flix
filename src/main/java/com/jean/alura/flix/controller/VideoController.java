@@ -41,4 +41,12 @@ public class VideoController {
         Page<DadosExibicaoVideo> page = videoRepository.findAll(pageable).map(DadosExibicaoVideo::new);
         return ResponseEntity.ok(page);
     }
+
+    @PutMapping
+    @Transactional
+    public ResponseEntity atualizar(@RequestBody DadosDetalhadosVideo dados){
+        Video video = videoRepository.getReferenceById(dados.id());
+        video.atualizar(dados);
+        return ResponseEntity.ok(new DadosDetalhadosVideo(video));
+    }
 }
