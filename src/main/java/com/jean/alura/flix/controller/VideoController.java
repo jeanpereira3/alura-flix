@@ -1,13 +1,11 @@
 package com.jean.alura.flix.controller;
 
-import com.electronwill.nightconfig.core.conversion.Path;
 import com.jean.alura.flix.model.DadosCadastroVideos;
 import com.jean.alura.flix.model.DadosDetalhadosVideo;
 import com.jean.alura.flix.model.DadosExibicaoVideo;
 import com.jean.alura.flix.model.Video;
 import com.jean.alura.flix.repository.VideoRepository;
 import jakarta.validation.Valid;
-import jakarta.websocket.server.PathParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -56,5 +54,12 @@ public class VideoController {
         Video video = videoRepository.getReferenceById(dados.id());
         video.atualizar(dados);
         return ResponseEntity.ok(new DadosDetalhadosVideo(video));
+    }
+
+    @DeleteMapping("/{id}")
+    @Transactional
+    public ResponseEntity deletar(@PathVariable Long id){
+        videoRepository.deleteById(id);
+        return ResponseEntity.noContent().build();
     }
 }
