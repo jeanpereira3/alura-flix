@@ -1,11 +1,13 @@
 package com.jean.alura.flix.controller;
 
+import com.electronwill.nightconfig.core.conversion.Path;
 import com.jean.alura.flix.model.DadosCadastroVideos;
 import com.jean.alura.flix.model.DadosDetalhadosVideo;
 import com.jean.alura.flix.model.DadosExibicaoVideo;
 import com.jean.alura.flix.model.Video;
 import com.jean.alura.flix.repository.VideoRepository;
 import jakarta.validation.Valid;
+import jakarta.websocket.server.PathParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -40,6 +42,12 @@ public class VideoController {
     public ResponseEntity<Page<DadosExibicaoVideo>> buscar(Pageable pageable){
         Page<DadosExibicaoVideo> page = videoRepository.findAll(pageable).map(DadosExibicaoVideo::new);
         return ResponseEntity.ok(page);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity buscarPorId(@PathVariable Long id){
+        Video video = videoRepository.getReferenceById(id);
+        return ResponseEntity.ok(new DadosDetalhadosVideo(video));
     }
 
     @PutMapping
