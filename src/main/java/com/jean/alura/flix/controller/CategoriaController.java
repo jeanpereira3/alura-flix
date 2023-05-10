@@ -45,4 +45,12 @@ public class CategoriaController {
         Categoria categoria = categoriaRepository.getReferenceById(id);
         return ResponseEntity.ok().body(new DadosDetalhamentoCategoria(categoria));
     }
+
+    @PutMapping
+    @Transactional
+    public ResponseEntity atualizar(@RequestBody DadosDetalhadosCategoria dados){
+        Categoria categoria = categoriaRepository.getReferenceById(dados.id());
+        categoria.atualizar(dados);
+        return ResponseEntity.ok().body(new DadosDetalhadosCategoria(categoria));
+    }
 }
