@@ -1,19 +1,19 @@
 package com.jean.alura.flix.controller;
 
-import com.jean.alura.flix.model.Categoria;
-import com.jean.alura.flix.model.DadosCadastroCategorias;
-import com.jean.alura.flix.model.DadosDetalhadosCategoria;
-import com.jean.alura.flix.model.DadosDetalhadosVideo;
+import com.jean.alura.flix.model.*;
 import com.jean.alura.flix.repository.CategoriaRepository;
 
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.net.URI;
+import java.util.List;
 
 @RestController
 @RequestMapping("/categorias")
@@ -32,5 +32,11 @@ public class CategoriaController {
         categoriaRepository.save(categoria);
         URI uri = uriComponentsBuilder.path("/categorias/{id}").buildAndExpand(categoria.getId()).toUri();
         return ResponseEntity.created(uri).body(new DadosDetalhadosCategoria(categoria));
+    }
+
+    @GetMapping
+    public ResponseEntity<Page<DadosExibicaoCategoria>> listar(Pageable pageable){
+        Page<DadosExibicaoCategoria> page = categoriaRepository.findAll(pageable).map(DadosExibicaoCategoria::new);
+        return ResponseEntity.ok(page);
     }
 }
