@@ -14,7 +14,7 @@ public class TratarErros {
 
     @ExceptionHandler(EntityNotFoundException.class)
     public ResponseEntity videoNaoEncontrado(){
-        return ResponseEntity.badRequest().body("Video não encontrado");
+        return ResponseEntity.badRequest().body("Id não encontrado");
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)

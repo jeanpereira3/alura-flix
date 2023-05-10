@@ -39,4 +39,10 @@ public class CategoriaController {
         Page<DadosExibicaoCategoria> page = categoriaRepository.findAll(pageable).map(DadosExibicaoCategoria::new);
         return ResponseEntity.ok(page);
     }
+
+    @GetMapping("/{id}")
+    public ResponseEntity detalharCategoria(@PathVariable Long id){
+        Categoria categoria = categoriaRepository.getReferenceById(id);
+        return ResponseEntity.ok().body(new DadosDetalhamentoCategoria(categoria));
+    }
 }
