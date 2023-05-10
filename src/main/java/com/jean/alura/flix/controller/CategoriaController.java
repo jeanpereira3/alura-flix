@@ -53,4 +53,11 @@ public class CategoriaController {
         categoria.atualizar(dados);
         return ResponseEntity.ok().body(new DadosDetalhadosCategoria(categoria));
     }
+
+    @DeleteMapping("/{id}")
+    @Transactional
+    public ResponseEntity deletar(@PathVariable Long id){
+        categoriaRepository.deleteById(id);
+        return ResponseEntity.noContent().build();
+    }
 }
