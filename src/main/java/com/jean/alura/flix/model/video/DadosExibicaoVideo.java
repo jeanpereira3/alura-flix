@@ -16,4 +16,6 @@ public record DadosExibicaoVideo(
                 new DadosExibicaoCategoria(video.getCategoria())
         );
     }
+
+
 }

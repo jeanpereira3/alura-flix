@@ -1,6 +1,7 @@
 package com.jean.alura.flix.controller;
 
 import com.jean.alura.flix.model.categoria.*;
+import com.jean.alura.flix.model.video.DadosExibicaoVideo;
 import com.jean.alura.flix.repository.CategoriaRepository;
 
 import jakarta.validation.Valid;
@@ -44,6 +45,7 @@ public class CategoriaController {
         Categoria categoria = categoriaRepository.getReferenceById(id);
         return ResponseEntity.ok().body(new DadosDetalhadosCategoria(categoria));
     }
+
 
     @PutMapping
     @Transactional

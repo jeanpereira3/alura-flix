@@ -50,6 +50,14 @@ public class VideoController {
         return ResponseEntity.ok(new DadosDetalhadosVideo(video));
     }
 
+    @GetMapping("/{id}/categorias")
+    public ResponseEntity<Page<DadosExibicaoVideo>> videosPorCategoria(
+            @PathVariable Long id, Pageable pageable
+    ){
+        Page<DadosExibicaoVideo> page = videoRepository.findByCategoriaId(pageable, id).map(DadosExibicaoVideo::new);
+        return ResponseEntity.ok().body(page);
+    }
+
     @PutMapping
     @Transactional
     public ResponseEntity atualizar(@RequestBody DadosDetalhadosVideo dados){
