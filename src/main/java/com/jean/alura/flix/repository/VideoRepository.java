@@ -10,4 +10,6 @@ import java.util.Optional;
 
 public interface VideoRepository extends JpaRepository<Video, Long> {
     Page<Video> findByCategoriaId(Pageable pageable, Long id);
+
+    Page<Video> findByTituloContainingIgnoreCase(String titulo, Pageable pageable);
 }

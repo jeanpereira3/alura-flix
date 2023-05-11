@@ -10,6 +10,7 @@ import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
@@ -39,8 +40,19 @@ public class VideoController {
     }
 
     @GetMapping
-    public ResponseEntity<Page<DadosExibicaoVideo>> buscar(Pageable pageable){
-        Page<DadosExibicaoVideo> page = videoRepository.findAll(pageable).map(DadosExibicaoVideo::new);
+    public ResponseEntity<Page<DadosExibicaoVideo>> buscar(
+            Pageable pageable,
+            @RequestParam(value = "titulo", required = false) String titulo
+
+    ){
+        Page<DadosExibicaoVideo> page;
+
+        if (titulo == null){
+            page = videoRepository.findAll(pageable).map(DadosExibicaoVideo::new);
+        } else {
+            page = videoRepository.findByTituloContainingIgnoreCase(titulo, pageable).map(DadosExibicaoVideo::new);
+        }
+
         return ResponseEntity.ok(page);
     }
 
