@@ -41,7 +41,7 @@ public class VideoController {
 
     @GetMapping
     public ResponseEntity<Page<DadosExibicaoVideo>> buscar(
-            Pageable pageable,
+            @PageableDefault(size = 5) Pageable pageable,
             @RequestParam(value = "titulo", required = false) String titulo
 
     ){
