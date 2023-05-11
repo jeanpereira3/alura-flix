@@ -1,6 +1,6 @@
 package com.jean.alura.flix.controller;
 
-import com.jean.alura.flix.model.*;
+import com.jean.alura.flix.model.categoria.*;
 import com.jean.alura.flix.repository.CategoriaRepository;
 
 import jakarta.validation.Valid;
@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.net.URI;
-import java.util.List;
 
 @RestController
 @RequestMapping("/categorias")
@@ -43,7 +42,7 @@ public class CategoriaController {
     @GetMapping("/{id}")
     public ResponseEntity detalharCategoria(@PathVariable Long id){
         Categoria categoria = categoriaRepository.getReferenceById(id);
-        return ResponseEntity.ok().body(new DadosDetalhamentoCategoria(categoria));
+        return ResponseEntity.ok().body(new DadosDetalhadosCategoria(categoria));
     }
 
     @PutMapping

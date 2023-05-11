@@ -1,4 +1,6 @@
-package com.jean.alura.flix.model;
+package com.jean.alura.flix.model.categoria;
+
+import com.jean.alura.flix.model.categoria.Categoria;
 
 public record DadosDetalhamentoCategoria(
         Long id,

@@ -1,0 +1,19 @@
+package com.jean.alura.flix.model.video;
+
+import com.jean.alura.flix.model.categoria.DadosExibicaoCategoria;
+
+public record DadosExibicaoVideo(
+        String titulo,
+        String descricao,
+        String url,
+        DadosExibicaoCategoria categoria
+) {
+    public DadosExibicaoVideo(Video video){
+        this(
+                video.getTitulo(),
+                video.getDescricao(),
+                video.getUrl(),
+                new DadosExibicaoCategoria(video.getCategoria())
+        );
+    }
+}

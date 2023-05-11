@@ -1,4 +1,4 @@
-package com.jean.alura.flix.model;
+package com.jean.alura.flix.model.categoria;
 
 import jakarta.validation.constraints.NotBlank;
 

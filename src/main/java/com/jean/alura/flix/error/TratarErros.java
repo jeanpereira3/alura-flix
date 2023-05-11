@@ -7,6 +7,7 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.List;
 
 @RestControllerAdvice
@@ -22,6 +23,11 @@ public class TratarErros {
         List<FieldError> error = e.getFieldErrors();
 
         return ResponseEntity.badRequest().body(error.stream().map(DadosErro::new));
+    }
+
+    @ExceptionHandler(SQLIntegrityConstraintViolationException.class)
+    public ResponseEntity cadastrarVideoComCategoriaInvalido(SQLIntegrityConstraintViolationException e){
+        return ResponseEntity.badRequest().body("Id categoria nao encontrado");
     }
 
     private record DadosErro(String erro, String mensagem){

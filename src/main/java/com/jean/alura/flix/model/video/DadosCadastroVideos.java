@@ -1,4 +1,4 @@
-package com.jean.alura.flix.model;
+package com.jean.alura.flix.model.video;
 
 import jakarta.validation.constraints.NotBlank;
 
@@ -8,6 +8,7 @@ public record DadosCadastroVideos(
         @NotBlank
         String descricao,
         @NotBlank
-        String url
+        String url,
+        Long categoriaId
 ) {
 }

@@ -1,9 +1,10 @@
 package com.jean.alura.flix.controller;
 
-import com.jean.alura.flix.model.DadosCadastroVideos;
-import com.jean.alura.flix.model.DadosDetalhadosVideo;
-import com.jean.alura.flix.model.DadosExibicaoVideo;
-import com.jean.alura.flix.model.Video;
+import com.jean.alura.flix.model.video.CadastrarVideoCategria;
+import com.jean.alura.flix.model.video.DadosCadastroVideos;
+import com.jean.alura.flix.model.video.DadosDetalhadosVideo;
+import com.jean.alura.flix.model.video.DadosExibicaoVideo;
+import com.jean.alura.flix.model.video.Video;
 import com.jean.alura.flix.repository.VideoRepository;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,14 +23,15 @@ public class VideoController {
 
     @Autowired
     private VideoRepository videoRepository;
+    @Autowired
+    private CadastrarVideoCategria cadastrarVideoCategria;
 
     @PostMapping
     @Transactional
     public ResponseEntity cadastrar(
             @RequestBody @Valid DadosCadastroVideos dados , UriComponentsBuilder uriComponentsBuilder
     ){
-        Video video = new Video(dados);
-        videoRepository.save(video);
+        Video video = cadastrarVideoCategria.cadastar(dados);
 
         URI uri = uriComponentsBuilder.path("/videos/{id}").buildAndExpand(video.getId()).toUri();
 
