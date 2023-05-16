@@ -6,14 +6,17 @@ public record DadosExibicaoVideo(
         String titulo,
         String descricao,
         String url,
-        DadosExibicaoCategoria categoria
+        DadosExibicaoCategoria categoria,
+        Boolean free
+
 ) {
     public DadosExibicaoVideo(Video video){
         this(
                 video.getTitulo(),
                 video.getDescricao(),
                 video.getUrl(),
-                new DadosExibicaoCategoria(video.getCategoria())
+                new DadosExibicaoCategoria(video.getCategoria()),
+                video.isFree()
         );
     }
 

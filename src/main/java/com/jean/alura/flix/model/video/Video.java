@@ -26,18 +26,18 @@ public class Video {
     private String url;
     @ManyToOne
     private Categoria categoria;
-
-    public Video(DadosCadastroVideos dados) {
-        this.titulo = dados.titulo();
-        this.descricao = dados.descricao();
-        this.url = dados.url();
-    }
+    private boolean free;
 
     public Video(DadosCadastroVideosCategoria dados) {
         this.titulo = dados.titulo();
         this.descricao = dados.descricao();
         this.url = dados.url();
         this.categoria = dados.categoria();
+        if (dados.free() != null){
+            this.free = dados.free();
+        } else {
+            this.free = false;
+        }
     }
 
     public void atualizar(DadosDetalhadosVideo dados) {

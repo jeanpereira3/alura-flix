@@ -7,9 +7,10 @@ public record DadosCadastroVideosCategoria(
         String titulo,
         String descricao,
         String url,
-        Categoria categoria
+        Categoria categoria,
+        Boolean free
         ) {
     public DadosCadastroVideosCategoria(DadosCadastroVideos dados, Categoria categoria){
-        this(dados.titulo(), dados.descricao(), dados.url(), categoria);
+        this(dados.titulo(), dados.descricao(), dados.url(), categoria, dados.free());
     }
 }

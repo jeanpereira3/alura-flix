@@ -8,14 +8,16 @@ public record DadosDetalhadosVideo(
         String titulo,
         String descricao,
         String url,
-        DadosDetalhadosCategoria categoria
+        DadosDetalhadosCategoria categoria,
+        Boolean free
 ) {
     public DadosDetalhadosVideo(Video video) {
         this(video.getId(),
                 video.getTitulo(),
                 video.getDescricao(),
                 video.getUrl(),
-                new DadosDetalhadosCategoria(video.getCategoria())
+                new DadosDetalhadosCategoria(video.getCategoria()),
+                video.isFree()
         );
     }
 }

@@ -70,6 +70,12 @@ public class VideoController {
         return ResponseEntity.ok().body(page);
     }
 
+    @GetMapping("/free")
+    public ResponseEntity<Page<DadosExibicaoVideo>> buscarVideosFree(Pageable pageable){
+        Page<DadosExibicaoVideo> page = videoRepository.findByFreeIsTrue(pageable).map(DadosExibicaoVideo::new);
+        return ResponseEntity.ok(page);
+    }
+
     @PutMapping
     @Transactional
     public ResponseEntity atualizar(@RequestBody DadosDetalhadosVideo dados){
